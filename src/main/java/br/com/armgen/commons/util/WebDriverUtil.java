@@ -10,6 +10,7 @@ import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
+import io.github.bonigarcia.wdm.Architecture;
 import io.github.bonigarcia.wdm.FirefoxDriverManager;
 import io.github.bonigarcia.wdm.InternetExplorerDriverManager;
 import ru.stqa.selenium.factory.WebDriverFactory;
@@ -27,21 +28,21 @@ public class WebDriverUtil {
 		String bPlataform;
 		
 		if(StringUtils.isBlank(browserName)) {
-			bName = PropertyLoader.loadProperty("browser.name");
+			bName = "";//PropertyLoader.loadProperty("browser.name");
 		} 
 		else {
 			bName = browserName;
 		}
 		
 		if(StringUtils.isBlank(browserVersion)) {
-			bVersion = PropertyLoader.loadProperty("browser.version");
+			bVersion = "";//PropertyLoader.loadProperty("browser.version");
 		} 
 		else {
 			bVersion = browserVersion;
 		}
 		
 		if(StringUtils.isBlank(browserPlatform)) {
-			bPlataform = PropertyLoader.loadProperty("browser.platform");
+			bPlataform = "";//PropertyLoader.loadProperty("browser.platform");
 		} 
 		else {
 			bPlataform = browserPlatform;
@@ -50,6 +51,7 @@ public class WebDriverUtil {
 		
 		if( "internet explorer".equals(bName)) {
 			InternetExplorerDriverManager.getInstance().setup();
+			InternetExplorerDriverManager.getInstance().setup(Architecture.x32);
 		} 
 		else if ("firefox".equals(bName)) {
 			FirefoxDriverManager.getInstance().setup();
