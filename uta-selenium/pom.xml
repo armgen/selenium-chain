@@ -1,0 +1,109 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>br.com.armgen</groupId>
+		<artifactId>uta</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>uta-selenium</artifactId>
+	<name>UTA - Selenium</name>
+
+	<dependencies>
+		<!-- Misc -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>br.com.armgen</groupId>
+			<artifactId>uta-sdk</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<!-- Selenium -->
+		<dependency>
+			<groupId>ru.stqa.selenium</groupId>
+			<artifactId>webdriver-factory</artifactId>
+			<version>1.1.46</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.github.bonigarcia</groupId>
+			<artifactId>webdrivermanager</artifactId>
+			<version>1.5.0</version>
+		</dependency>
+
+		<!-- Test -->
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+
+	</dependencies>
+
+	<profiles>
+		<profile>
+			<id>windows</id>
+			<properties>
+				<env>local</env>
+				<webdriver.iexplorer>C:\Users\leonardo.silva\tools\IEDriverServer.exe</webdriver.iexplorer>
+			</properties>
+		</profile>
+		<profile>
+			<id>iexplorer</id>
+			<properties>
+				<user.username></user.username>
+				<user.password></user.password>
+				<grid2.hub></grid2.hub>
+				<browser.name>internet explorer</browser.name>
+				<browser.version>8</browser.version>
+				<browser.platform></browser.platform>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>firefox</id>
+			<properties>
+				<user.username></user.username>
+				<user.password></user.password>
+				<grid2.hub></grid2.hub>
+				<browser.name>firefox</browser.name>
+				<browser.version></browser.version>
+				<browser.platform></browser.platform>
+			</properties>
+		</profile>
+
+	</profiles>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<configuration>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
