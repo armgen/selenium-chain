@@ -1,7 +1,7 @@
 /**
  * 
  */
-package br.com.armgen.uta.sdk.execution;
+package br.com.armgen.uta.sdk.execution.action;
 
 import br.com.armgen.uta.sdk.element.Page;
 
@@ -11,5 +11,5 @@ import br.com.armgen.uta.sdk.element.Page;
  */
 public interface Action {
 	
-	public void execute(Page page, Context context);
+	public void execute(Page page);
 }

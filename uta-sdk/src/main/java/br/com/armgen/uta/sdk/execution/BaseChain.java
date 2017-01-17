@@ -11,6 +11,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import br.com.armgen.commons.behavior.ComponentBehavior;
 import br.com.armgen.uta.sdk.element.Page;
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -18,6 +21,8 @@ import lombok.extern.slf4j.Slf4j;
  *
  */
 @Slf4j
+@Getter
+@RequiredArgsConstructor
 public abstract class BaseChain extends ComponentBehavior implements Chain {
 	
 	private final UUID chaindId = UUID.randomUUID();
@@ -28,17 +33,17 @@ public abstract class BaseChain extends ComponentBehavior implements Chain {
 	/**
 	 * Browser que o passo será executado
 	 */
-	private Browser browser;
+	private @NonNull Browser browser;
 	
 	/**
 	 * Define o browser para a execução do passo.
 	 * @param browser Browser
 	 * @return Instancia
 	 */
-	public Chain browser(Browser browser) {
-		this.browser = browser;
-		return this;
-	}
+//	public Chain browser(Browser browser) {
+//		this.browser = browser;
+//		return this;
+//	}
 
 	/**
 	 * @return the steps
@@ -59,17 +64,16 @@ public abstract class BaseChain extends ComponentBehavior implements Chain {
 	
 	@Override
 	public Page getCurrentPage() {
-		return this.browser.getPage();
+		return this.browser.getCurrentPage();
 	}
 
 	@Override
 	public void start() {
-		final Context context = new Context(this);
 		for (Entry<String, Step> entryStep : steps.entrySet()) {
 			currentStep = entryStep.getValue();
 			try {
 				this.executePreBehaviors(this);
-				this.executeStep(browser, currentStep, context);
+				this.executeStep(this, currentStep);
 				this.executePostBehaviors(this);
 			} catch (RuntimeException e) {
 				log.error("Erro executando o step {}", currentStep , e);
@@ -84,11 +88,12 @@ public abstract class BaseChain extends ComponentBehavior implements Chain {
 	 * @param browser 
 	 * @param step
 	 */
-	protected abstract void executeStep(Browser browser, Step step, Context context);
+	protected abstract void executeStep(Chain chain, Step step);
 	
 	
-	public void step(Step step) {
+	public Chain step(Step step) {
 		this.steps.put(String.valueOf(countSteps.getAndIncrement()), step);
+		return this;
 	}
 
 }

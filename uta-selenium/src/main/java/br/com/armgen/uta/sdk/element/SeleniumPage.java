@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import br.com.armgen.uta.sdk.WebDriverUtil;
+import br.com.armgen.uta.sdk.execution.Browser;
 import lombok.Getter;
 
 /**
@@ -18,11 +19,18 @@ import lombok.Getter;
 public class SeleniumPage extends Page {
 	
 	private final WebDriver driver;
+	private final Browser browser;
 
-	public SeleniumPage(String url) {
-		super(url);
-		this.driver = WebDriverUtil.create("internet explorer", "8", null);
+	public SeleniumPage(Browser browser, String url) {
+		this(browser, url, WebDriverUtil.create(browser.getName(), browser.getVersion() , null));
 	}
+	
+	public SeleniumPage(Browser browser, String url, WebDriver driver) {
+		super(url);
+		this.browser = browser;
+		this.driver = driver;
+	}
+	
 
 	public void init() {
 		this.getDriver().get(getUrl());
@@ -55,6 +63,12 @@ public class SeleniumPage extends Page {
 		}
 		
 		return null;
+	}
+
+	@Override
+	public Page navigate(String url) {
+		this.driver.get(url);
+		return this;
 	}
 
 }

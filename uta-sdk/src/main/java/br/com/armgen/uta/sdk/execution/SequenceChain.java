@@ -9,9 +9,13 @@ package br.com.armgen.uta.sdk.execution;
  */
 public class SequenceChain extends BaseChain implements Chain {
 
+	public SequenceChain(Browser browser) {
+		super(browser);
+	}
+
 	@Override
-	protected void executeStep(Browser browser, Step step, Context context) {
-		step.execute(this, browser.getPage(), context);
+	protected void executeStep(Chain chain, Step step) {
+		step.execute(this, chain.getBrowser().getCurrentPage());
 	}
 
 }

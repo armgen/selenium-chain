@@ -8,7 +8,9 @@ import java.util.List;
 
 import br.com.armgen.commons.elements.Form;
 import br.com.armgen.commons.elements.Link;
+import br.com.armgen.uta.sdk.execution.Browser;
 import lombok.Data;
+import lombok.NonNull;
 
 /**
  * @author leonardo.silva
@@ -26,10 +28,14 @@ public abstract class Page {
 	 */
 	private final  List<Form> forms = new ArrayList<Form>();
 	
-	protected final String url;
+	protected @NonNull String url;
 	
 	public abstract void init();
 	
+	public abstract Browser getBrowser();
+	
 	public abstract Object getElement(Element element);
+
+	public abstract Page navigate(String url);
 	
 }

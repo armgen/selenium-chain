@@ -16,7 +16,7 @@ public interface Chain {
 
 	String getId();
 
-	void step(Step step);
+	Chain step(Step step);
 
 	/**
 	 * Retorna o passo atual
@@ -24,4 +24,7 @@ public interface Chain {
 	Step getCurrentStep();
 
 	Page getCurrentPage();
+	
+	Browser getBrowser();
+	
 }

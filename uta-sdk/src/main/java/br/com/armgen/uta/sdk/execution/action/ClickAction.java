@@ -1,7 +1,7 @@
 /**
  * 
  */
-package br.com.armgen.uta.sdk.execution;
+package br.com.armgen.uta.sdk.execution.action;
 
 import br.com.armgen.uta.sdk.element.ClickableElement;
 import br.com.armgen.uta.sdk.element.Page;
@@ -20,7 +20,7 @@ public class ClickAction implements Action {
 	private final @NonNull ClickableElement element;
 
 	@Override
-	public void execute(Page page, Context context) {
+	public void execute(Page page) {
 		this.element.click(page);
 	}
 

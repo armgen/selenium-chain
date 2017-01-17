@@ -1,7 +1,7 @@
 /**
  * 
  */
-package br.com.armgen.uta.sdk.execution;
+package br.com.armgen.uta.sdk.execution.action;
 
 import br.com.armgen.uta.sdk.element.Page;
 import br.com.armgen.uta.sdk.element.SelectableElement;
@@ -23,7 +23,7 @@ public class SelectAction implements Action{
 	private final @NonNull String value;
 
 	@Override
-	public void execute(Page page, Context context) {
+	public void execute(Page page) {
 		this.element.selectValue(page, this.selectionType, this.value);
 	}
 
