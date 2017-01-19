@@ -8,11 +8,13 @@ import org.openqa.selenium.support.ui.Select;
 
 import br.com.armgen.uta.sdk.execution.By;
 
+import java.util.List;
+
 /**
  * @author leonardo.silva
  *
  */
-public class SelectElement extends Element implements SelectableElement, ClickableElement {
+public class SelectElement extends Element implements SelectableElement, ClickableElement, ReadableElement<List<String>> {
 
 	/**
 	 * 
@@ -52,4 +54,9 @@ public class SelectElement extends Element implements SelectableElement, Clickab
 		}
 	}
 
+	@Override
+	public List<String> read(Page page, String attributeName) {
+		//TODO Implementar
+		return null;
+	}
 }

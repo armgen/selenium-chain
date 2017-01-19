@@ -69,6 +69,7 @@ public abstract class BaseChain extends ComponentBehavior implements Chain {
 
 	@Override
 	public void start() {
+		this.browser.prepare();
 		for (Entry<String, Step> entryStep : steps.entrySet()) {
 			currentStep = entryStep.getValue();
 			try {

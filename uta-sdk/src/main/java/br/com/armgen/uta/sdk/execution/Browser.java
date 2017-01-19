@@ -28,5 +28,7 @@ public abstract class Browser {
 	}
 
 	public abstract Page switchTo(String pageTitle);
+
+	public abstract void prepare();
 	
 }

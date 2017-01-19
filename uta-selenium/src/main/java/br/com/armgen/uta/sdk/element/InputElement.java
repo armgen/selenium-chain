@@ -3,15 +3,18 @@
  */
 package br.com.armgen.uta.sdk.element;
 
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebElement;
 
 import br.com.armgen.uta.sdk.execution.By;
+
+import java.util.List;
 
 /**
  * @author leonardo.silva
  *
  */
-public class InputElement extends Element implements TypableElement, ClickableElement {
+public class InputElement extends Element implements TypableElement, ClickableElement,ClickableRadioElement, ReadableElement<String> {
 	
 	/**
 	 * @param identifier
@@ -38,8 +41,23 @@ public class InputElement extends Element implements TypableElement, ClickableEl
 	}
 
 	@Override
-	public void select(Page page) {
-		//TODO Seleciona o texto do input
+	public void select(Page page, String value) {
+		//TODO Implementar
 	}
-	
+
+	@Override
+	public void click(Page page, int index) {
+		SeleniumPage seleniumPage = (SeleniumPage) page;
+		List<WebElement> radios = seleniumPage.getElements(this);
+		if(radios == null) throw new IllegalStateException("Element Radio can not be empty for the click");
+		radios.get(index-1).click();
+	}
+
+	@Override
+	public String read(Page page, String attributeName) {
+		SeleniumPage seleniumPage = (SeleniumPage) page;
+		WebElement element = seleniumPage.getElement(this);
+		if(element == null) throw new IllegalStateException("Element can not be empty for the read");
+		return element.getAttribute(attributeName);
+	}
 }

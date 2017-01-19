@@ -19,6 +19,7 @@ public interface TypableElement {
 	/**
 	 * Seleciona o valor do campo.
 	 * @param page WebDriver para a implementacao
+	 * @param  value Valor
 	 */
-	public void select(Page page);
+	public void select(Page page, String value);
 }

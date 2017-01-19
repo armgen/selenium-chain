@@ -27,15 +27,15 @@ public abstract class Page {
 	 * Forms encontrados na pagina
 	 */
 	private final  List<Form> forms = new ArrayList<Form>();
-	
-	protected @NonNull String url;
-	
-	public abstract void init();
-	
+
 	public abstract Browser getBrowser();
 	
 	public abstract Object getElement(Element element);
 
+	public abstract List<?> getElements(Element element);
+
 	public abstract Page navigate(String url);
+
+	public abstract String getUrl();
 	
 }
