@@ -42,10 +42,10 @@ public class TableElement extends Element implements ReadableElement<Table> {
 
 		Table table = new Table();
 
-		List<WebElement> tr_collection = element.findElements(org.openqa.selenium.By.xpath("/tbody/tr"));
+		List<WebElement> tr_collection = element.findElements(org.openqa.selenium.By.xpath(".//tbody/tr"));
 
 		for(WebElement trElement : tr_collection) {
-			List<WebElement> td_collection = trElement.findElements(org.openqa.selenium.By.xpath("td"));
+			List<WebElement> td_collection = trElement.findElements(org.openqa.selenium.By.xpath(".//td"));
 			Tr tr = new Tr();
 			for(WebElement tdElement : td_collection){
 				tr.getTds().add(new Td(tdElement.getText()));
