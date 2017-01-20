@@ -3,18 +3,20 @@
  */
 package br.com.armgen.uta.sdk.element;
 
+import org.apache.commons.collections.map.LinkedMap;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 import br.com.armgen.uta.sdk.execution.By;
 
-import java.util.List;
+import java.util.*;
 
 /**
  * @author leonardo.silva
  *
  */
-public class SelectElement extends Element implements SelectableElement, ClickableElement, ReadableElement<List<String>> {
+public class SelectElement extends Element implements SelectableElement, ClickableElement, ReadableElement<Map<String,String>> {
 
 	/**
 	 * 
@@ -55,9 +57,16 @@ public class SelectElement extends Element implements SelectableElement, Clickab
 	}
 
 	@Override
-	public List<String> read(Page page, String attributeName) {
-		//TODO Implementar
-		return null;
+	public Map<String, String> read(Page page, String attributeName) {
+		SeleniumPage seleniumPage = (SeleniumPage) page;
+		WebElement element = seleniumPage.getElement(this);
+		if(element == null) throw new IllegalStateException("element can not be empty for the select");
+		Select select = new Select(element);
+		Map<String, String> options = new LinkedHashMap<>();
+		for(WebElement option : select.getOptions()){
+			options.put(option.getAttribute("value"), option.getText());
+		}
+		return options;
 	}
 
 	@Override

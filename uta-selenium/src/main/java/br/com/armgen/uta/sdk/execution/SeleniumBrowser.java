@@ -55,8 +55,8 @@ public class SeleniumBrowser extends Browser implements Serializable {
 
 	@Override
 	public void prepare() {
-		WebDriver driver = WebDriverUtil.create(this.getName(), this.getVersion(), this.getPlataform());
 		if(this.getCurrentPage() == null) {
+			WebDriver driver = WebDriverUtil.create(this.getName(), this.getVersion(), this.getPlataform());
 			this.setCurrentPage(new SeleniumPage(this, driver));
 		}
 	}
