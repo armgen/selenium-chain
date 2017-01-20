@@ -3,6 +3,7 @@
  */
 package br.com.armgen.uta.sdk.execution;
 
+import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -23,10 +24,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Getter
 @RequiredArgsConstructor
-public abstract class BaseChain extends ComponentBehavior implements Chain {
+public abstract class BaseChain extends ComponentBehavior implements Chain, Serializable {
 	
 	private final UUID chaindId = UUID.randomUUID();
-	private final AtomicInteger countSteps = new AtomicInteger(1);
+	private AtomicInteger countSteps = new AtomicInteger(1);
 	private final Map<String, Step> steps = new LinkedHashMap<String, Step>();
 	private Step currentStep;
 	
@@ -86,7 +87,7 @@ public abstract class BaseChain extends ComponentBehavior implements Chain {
 
 	/**
 	 * 
-	 * @param browser 
+	 * @param chain
 	 * @param step
 	 */
 	protected abstract void executeStep(Chain chain, Step step);
@@ -95,6 +96,13 @@ public abstract class BaseChain extends ComponentBehavior implements Chain {
 	public Chain step(Step step) {
 		this.steps.put(String.valueOf(countSteps.getAndIncrement()), step);
 		return this;
+	}
+
+	@Override
+	public void resetSteps(){
+		this.steps.clear();
+		this.countSteps = new AtomicInteger(1);
+		this.currentStep = null;
 	}
 
 }

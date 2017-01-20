@@ -10,4 +10,5 @@ package br.com.armgen.uta.sdk.element;
 public interface ReadableElement<T> {
 
 	public T read(Page page, String attributeName);
+	public String getText(Page page);
 }

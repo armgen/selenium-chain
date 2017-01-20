@@ -59,4 +59,10 @@ public class SelectElement extends Element implements SelectableElement, Clickab
 		//TODO Implementar
 		return null;
 	}
+
+	@Override
+	public String getText(Page page) {
+		//TODO Implementar
+		return null;
+	}
 }

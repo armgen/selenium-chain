@@ -20,6 +20,7 @@ public class SwitchWindowAction implements Action {
 
 	@Override
 	public void execute(Page page) {
+
 		page.getBrowser().switchTo(pageTitle);
 	}
 

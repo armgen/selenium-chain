@@ -26,5 +26,7 @@ public interface Chain {
 	Page getCurrentPage();
 	
 	Browser getBrowser();
+
+	void resetSteps();
 	
 }

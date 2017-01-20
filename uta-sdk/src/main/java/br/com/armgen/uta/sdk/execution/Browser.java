@@ -27,7 +27,7 @@ public abstract class Browser {
 		return this.getCurrentPage().navigate(url);
 	}
 
-	public abstract Page switchTo(String pageTitle);
+	public abstract void switchTo(String pageTitle);
 
 	public abstract void prepare();
 	

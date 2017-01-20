@@ -39,4 +39,12 @@ public class ButtonElement extends Element implements ClickableElement, Readable
 		if(element == null) throw new IllegalStateException("Element can not be empty for the read");
 		return element.getAttribute(attributeName);
 	}
+
+	@Override
+	public String getText(Page page) {
+		SeleniumPage seleniumPage = (SeleniumPage) page;
+		WebElement element = seleniumPage.getElement(this);
+		if(element == null) throw new IllegalStateException("Element can not be empty for the getText");
+		return element.getText();
+	}
 }

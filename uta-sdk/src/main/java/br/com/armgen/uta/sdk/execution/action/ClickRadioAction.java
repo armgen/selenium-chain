@@ -19,7 +19,7 @@ import lombok.RequiredArgsConstructor;
 public class ClickRadioAction implements Action {
 	
 	private final @NonNull ClickableRadioElement element;
-	private final @NonNull int index;
+	private final int index;
 
 	@Override
 	public void execute(Page page) {
