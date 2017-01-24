@@ -3,6 +3,7 @@
  */
 package br.com.armgen.uta.sdk.element;
 
+import com.google.common.base.Function;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,8 +11,12 @@ import org.openqa.selenium.WebElement;
 import br.com.armgen.uta.sdk.WebDriverUtil;
 import br.com.armgen.uta.sdk.execution.Browser;
 import lombok.Getter;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author leonardo.silva
@@ -34,7 +39,14 @@ public class SeleniumPage extends Page {
 	
 	@Override
 	public WebElement getElement(Element element) {
-		return getDriver().findElement(searchBy(element.getSearchBy(), element.getIdentifier()));
+		Wait wait = new FluentWait(driver).withTimeout(15, TimeUnit.SECONDS).pollingEvery(1, TimeUnit.SECONDS).ignoring(NoSuchElementException.class);
+		WebElement result = (WebElement) wait.until(new Function<WebDriver,WebElement>() {
+			@Override
+			public WebElement apply(WebDriver o) {
+				return getDriver().findElement(searchBy(element.getSearchBy(), element.getIdentifier()));
+			}
+		});
+		return result;
 	}
 
 	@Override

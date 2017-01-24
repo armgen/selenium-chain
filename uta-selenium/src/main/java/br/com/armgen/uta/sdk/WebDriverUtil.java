@@ -65,6 +65,7 @@ public class WebDriverUtil {
 		}
 		driver = WebDriverFactory.getDriver(capabilities);
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.manage().window().maximize();
 		return driver;
 	}
 

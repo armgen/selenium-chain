@@ -5,14 +5,20 @@ package br.com.armgen.uta.sdk.execution;
 
 import java.io.Serializable;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import br.com.armgen.uta.sdk.WebDriverUtil;
+import com.google.common.base.Function;
 import lombok.NoArgsConstructor;
 import org.openqa.selenium.WebDriver;
 
 import br.com.armgen.uta.sdk.element.Page;
 import br.com.armgen.uta.sdk.element.SeleniumPage;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 
 /**
  * @author leonardo.silva
@@ -37,20 +43,30 @@ public class SeleniumBrowser extends Browser implements Serializable {
 	public void switchTo(String pageTitle) {
 		WebDriver driver = ((SeleniumPage) this.getCurrentPage()).getDriver();
 
-		WebDriver driverPopup = null;
-		String selectedWindowHandler = null;
-		//String parentWindow = driver.getWindowHandle();
-		Set<String> handles = driver.getWindowHandles();
-		Iterator<String> iterator = handles.iterator();
-		while (iterator.hasNext()){
-			selectedWindowHandler = iterator.next();
+		Wait wait = new FluentWait(driver).withTimeout(15, TimeUnit.SECONDS).pollingEvery(1, TimeUnit.SECONDS).ignoring(NoDriverException.class);
+		WebDriver result = (WebDriver) wait.until(new Function<WebDriver,WebDriver>() {
+			@Override
+			public WebDriver apply(WebDriver driver) {
 
-			driverPopup = driver.switchTo().window(selectedWindowHandler);
-			if( driverPopup.getTitle().equals(pageTitle) ) {
-				break;
+				Set<String> handles = driver.getWindowHandles();
+				Iterator<String> iterator = handles.iterator();
+
+				WebDriver driverPopup = null;
+				String selectedWindowHandler = null;
+				boolean hasPopup = false;
+				while (iterator.hasNext()){
+					selectedWindowHandler = iterator.next();
+					driverPopup = driver.switchTo().window(selectedWindowHandler);
+					if( driverPopup.getTitle().equals(pageTitle) ) {
+						hasPopup = true;
+						break;
+					}
+				}
+				if(!hasPopup)throw new NoDriverException();
+				return driverPopup;
 			}
-		}
-		this.setCurrentPage(new SeleniumPage(this, driverPopup));
+		});
+		this.setCurrentPage(new SeleniumPage(this, result));
 	}
 
 	@Override
