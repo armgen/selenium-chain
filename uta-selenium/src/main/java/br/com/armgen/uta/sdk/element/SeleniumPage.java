@@ -39,7 +39,7 @@ public class SeleniumPage extends Page {
 	
 	@Override
 	public WebElement getElement(Element element) {
-		Wait wait = new FluentWait(driver).withTimeout(15, TimeUnit.SECONDS).pollingEvery(1, TimeUnit.SECONDS).ignoring(NoSuchElementException.class);
+		Wait wait = new FluentWait(driver).withTimeout(15, TimeUnit.SECONDS).pollingEvery(100, TimeUnit.MILLISECONDS).ignoring(NoSuchElementException.class);
 		WebElement result = (WebElement) wait.until(new Function<WebDriver,WebElement>() {
 			@Override
 			public WebElement apply(WebDriver o) {
