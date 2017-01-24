@@ -79,8 +79,10 @@ public abstract class BaseChain extends ComponentBehavior implements Chain, Seri
 				this.executePostBehaviors(this);
 			} catch (RuntimeException e) {
 				log.error("Erro executando o step {}", currentStep , e);
+				break;
 			} catch (Exception e) {
 				log.error("Erro executando o step {}", currentStep , e);
+				break;
 			}  
 		}
 	}
