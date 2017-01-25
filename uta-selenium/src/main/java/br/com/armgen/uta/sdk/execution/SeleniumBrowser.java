@@ -77,5 +77,9 @@ public class SeleniumBrowser extends Browser implements Serializable {
 		}
 	}
 
-
+	@Override
+	public void switchToAlert() {
+		WebDriver driver = ((SeleniumPage) this.getCurrentPage()).getDriver();
+		driver.switchTo().alert();
+	}
 }

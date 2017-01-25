@@ -30,5 +30,7 @@ public abstract class Browser {
 	public abstract void switchTo(String pageTitle);
 
 	public abstract void prepare();
-	
+
+	public abstract void switchToAlert();
+
 }

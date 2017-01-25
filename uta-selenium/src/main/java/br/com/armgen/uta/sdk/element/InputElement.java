@@ -37,6 +37,7 @@ public class InputElement extends Element implements TypableElement, ClickableEl
 		SeleniumPage seleniumPage = (SeleniumPage) page;
 		WebElement element = seleniumPage.getElement(this);
 		if(element == null) throw new IllegalStateException("Element can not be empty for the type");
+		element.clear();
 		element.sendKeys(value);
 	}
 
