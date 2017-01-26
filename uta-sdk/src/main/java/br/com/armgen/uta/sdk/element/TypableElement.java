@@ -15,6 +15,13 @@ public interface TypableElement {
 	 * @param value Valor
 	 */
 	public void type(Page page, String value);
+
+	/**
+	 * Inputa o valor no campo hidden
+	 * @param page WebDriver para a implementacao
+	 * @param value Valor
+	 */
+	public void typeHidden(Page page, String value);
 	
 	/**
 	 * Seleciona o valor do campo.

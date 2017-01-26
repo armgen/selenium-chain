@@ -43,7 +43,7 @@ public class SeleniumBrowser extends Browser implements Serializable {
 	public void switchTo(String pageTitle) {
 		WebDriver driver = ((SeleniumPage) this.getCurrentPage()).getDriver();
 
-		Wait wait = new FluentWait(driver).withTimeout(15, TimeUnit.SECONDS).pollingEvery(100, TimeUnit.MILLISECONDS).ignoring(NoDriverException.class);
+		Wait wait = new FluentWait(driver).withTimeout(25, TimeUnit.SECONDS).pollingEvery(100, TimeUnit.MILLISECONDS).ignoring(NoDriverException.class);
 		WebDriver result = (WebDriver) wait.until(new Function<WebDriver,WebDriver>() {
 			@Override
 			public WebDriver apply(WebDriver driver) {

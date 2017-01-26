@@ -4,6 +4,7 @@
 package br.com.armgen.uta.sdk.element;
 
 import org.apache.commons.lang3.StringUtils;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
 import br.com.armgen.uta.sdk.execution.By;
@@ -37,6 +38,18 @@ public class InputElement extends Element implements TypableElement, ClickableEl
 		SeleniumPage seleniumPage = (SeleniumPage) page;
 		WebElement element = seleniumPage.getElement(this);
 		if(element == null) throw new IllegalStateException("Element can not be empty for the type");
+		element.clear();
+		element.sendKeys(value);
+	}
+
+	@Override
+	public void typeHidden(Page page, String value) {
+		SeleniumPage seleniumPage = (SeleniumPage) page;
+		WebElement element = seleniumPage.getElement(this);
+		if(element == null) throw new IllegalStateException("Element can not be empty for the type");
+		//modify field
+		String js = "arguments[0].style.height='auto'; arguments[0].style.visibility='visible';";
+		((JavascriptExecutor) seleniumPage.getDriver()).executeScript(js, element);
 		element.clear();
 		element.sendKeys(value);
 	}
