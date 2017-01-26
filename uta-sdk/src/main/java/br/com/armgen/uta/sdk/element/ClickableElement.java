@@ -10,4 +10,5 @@ package br.com.armgen.uta.sdk.element;
 public interface ClickableElement {
 
 	public void click(Page page);
+	public void doubleClick(Page page);
 }

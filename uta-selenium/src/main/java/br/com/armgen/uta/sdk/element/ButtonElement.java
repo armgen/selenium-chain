@@ -5,6 +5,7 @@ package br.com.armgen.uta.sdk.element;
 
 import br.com.armgen.uta.sdk.execution.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import java.util.List;
 
@@ -30,6 +31,14 @@ public class ButtonElement extends Element implements ClickableElement, Readable
 		element.click();
 	}
 
+	@Override
+	public void doubleClick(Page page) {
+		SeleniumPage seleniumPage = (SeleniumPage) page;
+		WebElement element = seleniumPage.getElement(this);
+		if(element == null) throw new IllegalStateException("Element can not be empty for the double click");
+		Actions act = new Actions(seleniumPage.getDriver());
+		act.doubleClick(element).build().perform();
+	}
 
 
 	@Override

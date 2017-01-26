@@ -6,6 +6,7 @@ package br.com.armgen.uta.sdk.element;
 import org.apache.commons.collections.map.LinkedMap;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
 import br.com.armgen.uta.sdk.execution.By;
@@ -73,5 +74,14 @@ public class SelectElement extends Element implements SelectableElement, Clickab
 	public String getText(Page page) {
 		//TODO Implementar
 		return null;
+	}
+
+	@Override
+	public void doubleClick(Page page) {
+		SeleniumPage seleniumPage = (SeleniumPage) page;
+		WebElement element = seleniumPage.getElement(this);
+		if(element == null) throw new IllegalStateException("Element can not be empty for the double click");
+		Actions act = new Actions(seleniumPage.getDriver());
+		act.doubleClick(element).build().perform();
 	}
 }

@@ -8,6 +8,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
 import br.com.armgen.uta.sdk.execution.By;
+import org.openqa.selenium.interactions.Actions;
 
 import java.util.List;
 
@@ -82,4 +83,14 @@ public class InputElement extends Element implements TypableElement, ClickableEl
 		if(element == null) throw new IllegalStateException("Element can not be empty for the getText");
 		return element.getText();
 	}
+
+	@Override
+	public void doubleClick(Page page) {
+		SeleniumPage seleniumPage = (SeleniumPage) page;
+		WebElement element = seleniumPage.getElement(this);
+		if(element == null) throw new IllegalStateException("Element can not be empty for the double click");
+		Actions act = new Actions(seleniumPage.getDriver());
+		act.doubleClick(element).build().perform();
+	}
+
 }
