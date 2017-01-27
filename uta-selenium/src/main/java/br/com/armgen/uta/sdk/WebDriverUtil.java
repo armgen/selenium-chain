@@ -64,7 +64,7 @@ public class WebDriverUtil {
 			capabilities.setPlatform(Platform.valueOf(bPlataform));
 		}
 		driver = WebDriverFactory.getDriver(capabilities);
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(45, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 		return driver;
 	}
