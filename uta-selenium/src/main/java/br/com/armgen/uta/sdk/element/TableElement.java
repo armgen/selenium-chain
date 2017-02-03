@@ -42,12 +42,14 @@ public class TableElement extends Element implements ReadableElement<Table> {
 
 		Table table = new Table();
 
+		if(!element.getAttribute("innerHTML").contains("<tr"))return null;
 		List<WebElement> tr_collection = element.findElements(org.openqa.selenium.By.xpath(".//tbody/tr"));
-
 		for(WebElement trElement : tr_collection) {
+			if(trElement.getAttribute("innerHTML").contains("<table"))continue;
 			List<WebElement> td_collection = trElement.findElements(org.openqa.selenium.By.xpath(".//td"));
 			Tr tr = new Tr();
 			for(WebElement tdElement : td_collection){
+				if(tdElement.getAttribute("innerHTML").contains("<table"))continue;
 				tr.getTds().add(new Td(tdElement.getText()));
 			}
 			table.getTrs().add(tr);

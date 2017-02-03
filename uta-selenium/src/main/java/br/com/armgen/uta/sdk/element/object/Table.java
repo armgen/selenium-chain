@@ -1,5 +1,6 @@
 package br.com.armgen.uta.sdk.element.object;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -13,5 +14,6 @@ import java.util.List;
 @Data
 public class Table implements Serializable{
 
+    @JsonProperty("lines")
     private List<Tr> trs = new LinkedList<>();
 }
