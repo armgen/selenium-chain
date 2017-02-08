@@ -45,7 +45,11 @@ public class TableElement extends Element implements ReadableElement<Table> {
 		if(!element.getAttribute("innerHTML").contains("<tr"))return null;
 		List<WebElement> tr_collection = element.findElements(org.openqa.selenium.By.xpath(".//tbody/tr"));
 		for(WebElement trElement : tr_collection) {
+			//TODO ARRUMAR ISSO DEPOIS DA POC
 			if(trElement.getAttribute("innerHTML").contains("<table"))continue;
+			if(trElement.getAttribute("innerHTML").contains("(Tramitação prioritária)"))continue;
+			if(trElement.getAttribute("innerHTML").contains("Local Físico:"))continue;
+			if(trElement.getAttribute("innerHTML").contains("Outros assuntos:"))continue;
 			List<WebElement> td_collection = trElement.findElements(org.openqa.selenium.By.xpath(".//td"));
 			Tr tr = new Tr();
 			for(WebElement tdElement : td_collection){
