@@ -28,6 +28,10 @@ public enum By {
 	/**
 	 * Id do elemento. Ex.: ...input name="someInput" id="someId"...
 	 */
-	XPATH;
+	XPATH,
 
+	/**
+	 * Css do elemento. Ex.: ...input class="css"...
+	 */
+	CSS_SELECTOR;
 }
