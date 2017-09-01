@@ -1,4 +1,4 @@
-# selenium-chain
+# selenium-chain [![Coverage Status](https://coveralls.io/repos/github/armgen/selenium-chain/badge.svg?branch=master)](https://coveralls.io/github/armgen/selenium-chain?branch=master)
 Projeto para automatização de testes com Selenium
 
 # Throubleshooting `InternetExplorerDriver`
