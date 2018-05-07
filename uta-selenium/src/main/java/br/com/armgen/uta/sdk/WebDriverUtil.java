@@ -6,11 +6,13 @@ package br.com.armgen.uta.sdk;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.StringUtils;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import io.github.bonigarcia.wdm.Architecture;
+import io.github.bonigarcia.wdm.ChromeDriverManager;
 import io.github.bonigarcia.wdm.FirefoxDriverManager;
 import io.github.bonigarcia.wdm.InternetExplorerDriverManager;
 import ru.stqa.selenium.factory.WebDriverFactory;
@@ -55,6 +57,8 @@ public class WebDriverUtil {
 		} 
 		else if ("firefox".equals(bName)) {
 			FirefoxDriverManager.getInstance().setup();
+		} else {
+			ChromeDriverManager.getInstance().setup();
 		}
 		
 		DesiredCapabilities capabilities = new DesiredCapabilities();
@@ -65,7 +69,8 @@ public class WebDriverUtil {
 		}
 		driver = WebDriverFactory.getDriver(capabilities);
 		driver.manage().timeouts().implicitlyWait(45, TimeUnit.SECONDS);
-		driver.manage().window().maximize();
+		driver.manage().window().setSize(new Dimension(1600,900));
+//		driver.manage().window().maximize();
 		return driver;
 	}
 
